@@ -11,17 +11,15 @@ import android.os.Handler;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-
-import androidx.annotation.NonNull;
-
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.microsoft.appcenter.analytics.Analytics;
 import com.opencsv.CSVWriter;
 import com.smartjinyu.mybookshelf.database.BookBaseHelper;
 
@@ -86,11 +84,6 @@ public class SettingsFragment extends PreferenceFragment {
         exportCSVPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-
-                Map<String, String> logEvents = new HashMap<>();
-                logEvents.put("Export CSV", "Click Export to csv");
-                Analytics.trackEvent(TAG, logEvents);
-
                 exportToCSV();
                 return false;
             }
@@ -139,10 +132,6 @@ public class SettingsFragment extends PreferenceFragment {
                                             startActivityForResult(backupFileIntent, EXPORT_CSV_FILE_CODE);
                                         } else {
                                             Log.e(TAG, "No Document Provider Available");
-                                            Map<String, String> logEvents = new HashMap<>();
-                                            logEvents.put("Export CSV", "No Document Provider Available");
-                                            Analytics.trackEvent(TAG, logEvents);
-
                                             Toast.makeText(getActivity(), R.string.settings_no_document_provider_toast, Toast.LENGTH_LONG)
                                                     .show();
                                         }
@@ -246,17 +235,12 @@ public class SettingsFragment extends PreferenceFragment {
                     Toast.makeText(getActivity(), R.string.settings_no_document_provider_toast, Toast.LENGTH_LONG)
                             .show();
                 }
-                Analytics.trackEvent(TAG, logEvents);
                 return false;
             }
         });
 
         restorePreference = findPreference("settings_pref_restore");
         restorePreference.setOnPreferenceClickListener(preference -> {
-            Map<String, String> logEvents = new HashMap<>();
-            logEvents.put("Restore", "Click Restore");
-            Analytics.trackEvent(TAG, logEvents);
-
             Intent restoreFileIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
             restoreFileIntent.addCategory(Intent.CATEGORY_OPENABLE);
             restoreFileIntent.setType("application/zip");
@@ -265,12 +249,9 @@ public class SettingsFragment extends PreferenceFragment {
                 startActivityForResult(restoreFileIntent, OPEN_BACKUP_FILE_CODE);
             } else {
                 Log.e(TAG, "No Document Provider Available");
-                logEvents.put("Restore", "No Document Provider Available");
-
                 Toast.makeText(getActivity(), R.string.settings_no_document_provider_toast, Toast.LENGTH_LONG)
                         .show();
             }
-            Analytics.trackEvent(TAG, logEvents);
             return false;
         });
 
@@ -333,10 +314,6 @@ public class SettingsFragment extends PreferenceFragment {
         @Override
         protected void onPostExecute(Boolean isSucceed) {
             mDialog.dismiss();
-            Map<String, String> logEvents = new HashMap<>();
-            logEvents.put("Backup", "Backup Result = " + isSucceed.toString());
-            Analytics.trackEvent(TAG, logEvents);
-
             if (isSucceed) {
                 String content = getString(R.string.backup_succeed_toast);
                 Toast.makeText(getActivity(), content, Toast.LENGTH_LONG).show();
@@ -474,10 +451,6 @@ public class SettingsFragment extends PreferenceFragment {
         @Override
         protected void onPostExecute(Boolean isSucceed) {
             mDialog.dismiss();
-            Map<String, String> logEvents = new HashMap<>();
-            logEvents.put("Restore", "Restore Result = " + isSucceed.toString());
-            Analytics.trackEvent(TAG, logEvents);
-
             if (isSucceed) {
                 Toast.makeText(getActivity(), getString(R.string.restore_succeed_toast), Toast.LENGTH_LONG).show();
                 Handler handler = new Handler();
@@ -750,10 +723,6 @@ public class SettingsFragment extends PreferenceFragment {
 
         @Override
         protected void onPostExecute(Boolean isSucceed) {
-            Map<String, String> logEvents = new HashMap<>();
-            logEvents.put("Export CSV", "Export Result = " + isSucceed.toString());
-            Analytics.trackEvent(TAG, logEvents);
-
             mDialog.dismiss();
             if (isSucceed) {
                 String toastText = getString(R.string.export_csv_export_succeed_toast);
@@ -788,9 +757,6 @@ public class SettingsFragment extends PreferenceFragment {
                     .onPositive(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Map<String, String> logEvents = new HashMap<>();
-                            logEvents.put("Restore", "Confirm Restore");
-                            Analytics.trackEvent(TAG, logEvents);
                             new restoreTask().execute(intent.getData());
                         }
                     })
@@ -798,9 +764,6 @@ public class SettingsFragment extends PreferenceFragment {
                     .onNegative(new MaterialDialog.SingleButtonCallback() {
                         @Override
                         public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                            Map<String, String> logEvents = new HashMap<>();
-                            logEvents.put("Restore", "Give up Restore");
-                            Analytics.trackEvent(TAG, logEvents);
                             dialog.dismiss();
                         }
                     })

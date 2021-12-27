@@ -8,13 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.MenuItemCompat;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -22,17 +15,22 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.MenuItemCompat;
+
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.zxing.Result;
-import com.microsoft.appcenter.analytics.Analytics;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -67,15 +65,6 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION);
         }
-
-        Map<String, String> logEvents = new HashMap<>();
-        logEvents.put("Activity", TAG);
-        Analytics.trackEvent("onCreate", logEvents);
-
-        logEvents.clear();
-        logEvents.put("Name", "onCreate");
-        Analytics.trackEvent(TAG, logEvents);
-
 
         if (savedInstanceState != null) {
             mFlash = savedInstanceState.getBoolean(FLASH_STATE, false);
@@ -307,11 +296,6 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
 
 
     public void fetchSucceed(final Book mBook, final String imageURL) {
-
-        Map<String, String> logEvents = new HashMap<>();
-        logEvents.put("Fetch", "Fetch succeed");
-        Analytics.trackEvent(TAG, logEvents);
-
         Handler mHandler = new Handler(Looper.getMainLooper());
         mHandler.post(new Runnable() {//on the main thread
             @Override
@@ -337,10 +321,6 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
          * event = 0, unexpected response code
          * event = 1, request failed
          */
-        Map<String, String> logEvents = new HashMap<>();
-        logEvents.put("Fetch", "Fetch failed, event = " + event);
-        Analytics.trackEvent(TAG, logEvents);
-
         indexOfServiceTested += 1;
         if (indexOfServiceTested < selectedServices.length) {
             // test next

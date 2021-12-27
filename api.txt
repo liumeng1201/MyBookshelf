@@ -1,0 +1,40 @@
+request:
+https://api.jike.xyz/situ/book/isbn/{ISBN}?apikey={apiKey}
+
+demo:
+ISBN=9787506380263
+apikey=11743.0ff85b4a9907f0329006f1bedd1172ea.829d9ac0540d6ae8c6250e7da19f0f4c
+
+response:
+{
+    "ret": 0,
+    "msg": "请求成功",
+    "data": {
+        "id": 9787506380263,
+        "name": "人间失格",
+        "subname": "",
+        "author": "太宰治",
+        "translator": "杨伟",
+        "publishing": "作家出版社",
+        "published": "2015-8",
+        "designed": "平装",
+        "code": "9787506380263",
+        "douban": 26647769,
+        "doubanScore": 82,
+        "brand": "世界文学名著",
+        "weight": null,
+        "size": null,
+        "pages": "219",
+        "photoUrl": "https://img3.doubanio.com/view/subject/m/public/s28323390.jpg",
+        "localPhotoUrl": "",
+        "price": "25.00元",
+        "froms": "douban_api2",
+        "num": 5,
+        "createTime": "2021-04-23T15:51:58",
+        "uptime": "2021-12-19T16:47:30",
+        "authorIntro": "太宰治，“私小说”领域的天才。宇川端康成、三岛由纪夫齐名，被视为日本战后文学的巅峰人物，后人称其为“无赖派大师”。",
+        "description": "收录《人间失格》《维庸之妻》《Good-bye》《灯笼》《满愿》《美男子与香烟》《皮肤与心》《蟋蟀》《樱桃》",
+        "reviews": null,
+        "tags": null
+    }
+}

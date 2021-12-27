@@ -1,11 +1,5 @@
 apply plugin: 'com.android.application'
 
-def static getAppCenterApiKey() {
-    def Properties props = new Properties()
-    props.load(new FileInputStream(new File('apiKeys.properties')))
-    return props['appcenterApiKey']
-}
-
 def static getDoubanApiKey() {
     def Properties props = new Properties()
     props.load(new FileInputStream(new File('apiKeys.properties')))
@@ -32,11 +26,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', "doubanApiKey", "\"" + getDoubanApiKey() + "\""
-            buildConfigField 'String', "appcenterApiKey", "\"" + getAppCenterApiKey() + "\""
         }
         debug {
             buildConfigField 'String', "doubanApiKey", "\"" + getDoubanApiKey() + "\""
-            buildConfigField 'String', "appcenterApiKey", "\"" + getAppCenterApiKey() + "\""
         }
     }
     lintOptions {
@@ -46,8 +38,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
-
 }
 
 
@@ -70,18 +60,12 @@ dependencies {
     implementation 'com.klinkerapps:sliding-activity:1.5.2'
     implementation 'com.mikepenz:materialdrawer:6.1.2'
     implementation 'com.github.promeg:tinypinyin:2.0.3'
-    // implementation 'com.lapism:searchview:3.8'
-    // implementation project(':AlipayZeroSdk')
     implementation project(':compressor')
-    // implementation 'id.zelory:compressor:2.1.0'
     implementation('com.squareup.retrofit2:converter-simplexml:2.9.0') {
         exclude group: 'xpp3', module: 'xpp3'
         exclude group: 'stax', module: 'stax-api'
         exclude group: 'stax', module: 'stax'
     }
     implementation files('libs/opencsv-3.9.jar')
-    implementation "com.microsoft.appcenter:appcenter-analytics:3.3.1"
-    implementation "com.microsoft.appcenter:appcenter-crashes:3.3.1"
-
 
 }
