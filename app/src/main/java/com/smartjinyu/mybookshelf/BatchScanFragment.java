@@ -132,6 +132,9 @@ public class BatchScanFragment extends Fragment implements ZXingScannerView.Resu
         } else if (BatchAddActivity.selectedServices[BatchAddActivity.indexOfServiceTested] == 1) {
             OpenLibraryFetcher fetcher = new OpenLibraryFetcher();
             fetcher.getBookInfo(getActivity(), isbn, 1);
+        } else if (BatchAddActivity.selectedServices[BatchAddActivity.indexOfServiceTested] == 2) {
+            JikeFetcher fetcher = new JikeFetcher();
+            fetcher.getBookInfo(getActivity(), isbn, 1);
         }
     }
 

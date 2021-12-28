@@ -10,6 +10,14 @@ def static getDoubanApiKey() {
     return base64
 }
 
+def static getJikeApiKey() {
+    def Properties props = new Properties()
+    props.load(new FileInputStream(new File('apiKeys.properties')))
+    byte[] data = props['jikeApiKey'].getBytes("UTF-8")
+    String base64 = Base64.getEncoder().encodeToString(data)
+    return base64
+}
+
 android {
     compileSdkVersion project.CompileSdkVersion
     buildToolsVersion project.BuildToolsVersion
@@ -26,9 +34,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField 'String', "doubanApiKey", "\"" + getDoubanApiKey() + "\""
+            buildConfigField 'String', "jikeApiKey", "\"" + getJikeApiKey() + "\""
         }
         debug {
             buildConfigField 'String', "doubanApiKey", "\"" + getDoubanApiKey() + "\""
+            buildConfigField 'String', "jikeApiKey", "\"" + getJikeApiKey() + "\""
         }
     }
     lintOptions {

@@ -351,6 +351,9 @@ public class BatchAddActivity extends AppCompatActivity {
             } else if (selectedServices[indexOfServiceTested] == 1) {
                 OpenLibraryFetcher fetcher = new OpenLibraryFetcher();
                 fetcher.getBookInfo(this, isbn, 1);
+            } else if (selectedServices[indexOfServiceTested] == 2) {
+                JikeFetcher fetcher = new JikeFetcher();
+                fetcher.getBookInfo(this, isbn, 1);
             }
         } else {
             if (event == 0) {

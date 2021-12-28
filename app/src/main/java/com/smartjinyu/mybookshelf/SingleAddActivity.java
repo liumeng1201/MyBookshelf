@@ -262,6 +262,9 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
         } else if (selectedServices[indexOfServiceTested] == 1) {
             OpenLibraryFetcher fetcher = new OpenLibraryFetcher();
             fetcher.getBookInfo(this, isbn, 0);
+        } else if (selectedServices[indexOfServiceTested] == 2) {
+            JikeFetcher fetcher = new JikeFetcher();
+            fetcher.getBookInfo(this, isbn, 0);
         }
     }
 
@@ -329,6 +332,9 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
                 fetcher.getBookInfo(this, isbn, 0);
             } else if (selectedServices[indexOfServiceTested] == 1) {
                 OpenLibraryFetcher fetcher = new OpenLibraryFetcher();
+                fetcher.getBookInfo(this, isbn, 0);
+            } else if (selectedServices[indexOfServiceTested] == 2) {
+                JikeFetcher fetcher = new JikeFetcher();
                 fetcher.getBookInfo(this, isbn, 0);
             }
         } else {
