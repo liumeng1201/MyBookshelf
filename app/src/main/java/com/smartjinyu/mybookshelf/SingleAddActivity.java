@@ -253,7 +253,7 @@ public class SingleAddActivity extends AppCompatActivity implements ZXingScanner
             Gson gson = new Gson();
             selectedServices = gson.fromJson(rawWS, type);
         } else {
-            selectedServices = new Integer[]{0, 1}; //two webServices currently
+            selectedServices = new Integer[]{2}; //two webServices currently
         }
 
         if (selectedServices[indexOfServiceTested] == 0) {

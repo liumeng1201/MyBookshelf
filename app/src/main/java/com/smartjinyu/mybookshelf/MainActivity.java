@@ -1356,7 +1356,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkTermOfService() {
-        boolean isAccepted = defaultSharedPreferences.getBoolean("isAcceptTermOfService", false);
+        boolean isAccepted = defaultSharedPreferences.getBoolean("isAcceptTermOfService", true);
         if (!isAccepted) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(getString(R.string.about_preference_term_of_service));

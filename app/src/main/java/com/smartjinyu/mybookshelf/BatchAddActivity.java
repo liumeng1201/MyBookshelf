@@ -94,7 +94,7 @@ public class BatchAddActivity extends AppCompatActivity {
             Gson gson = new Gson();
             selectedServices = gson.fromJson(rawWS, type);
         } else {
-            selectedServices = new Integer[]{0, 1}; //two webServices currently
+            selectedServices = new Integer[]{2}; //two webServices currently
         }
 
     }

@@ -26,7 +26,7 @@
         <SwitchPreference
             android:title="@string/settings_check_update_title"
             android:key="settings_pref_check_update"
-            android:defaultValue="1"/>
+            android:defaultValue="0"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

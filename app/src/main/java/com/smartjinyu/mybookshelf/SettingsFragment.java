@@ -172,7 +172,7 @@ public class SettingsFragment extends PreferenceFragment {
             Gson gson = new Gson();
             initialSelected = gson.fromJson(rawWS, type);
         } else {
-            initialSelected = new Integer[]{0, 1}; //two webServices currently
+            initialSelected = new Integer[]{2}; //two webServices currently
         }
 
         webServicesPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
