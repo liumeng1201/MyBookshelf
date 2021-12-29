@@ -142,6 +142,8 @@
     <string name="settings_info_retrieval">自动获取书籍详情</string>
     <string name="settings_settings">设置</string>
     <string name="settings_web_services_title">网络服务</string>
+    <string name="settings_web_services_jikeapikey_title">设置jikeApiKey</string>
+    <string name="settings_web_services_jikeapikey_hint">请输入jikeApiKey</string>
     <string name="single_scan_toolbar">扫描条形码</string>
     <string name="sort_choice_dialog_positive">排序</string>
     <string name="sort_choice_dialog_title">排序依据</string>

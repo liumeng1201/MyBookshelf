@@ -2,9 +2,13 @@ package com.smartjinyu.mybookshelf;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+
+import androidx.annotation.RequiresApi;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -22,7 +26,6 @@ import retrofit2.http.Query;
 public class JikeFetcher extends BookFetcher {
     private static final String TAG = "JikeFetcher";
 
-
     @Override
     public void getBookInfo(final Context context, final String isbn, final int mode) {
         mContext = context;
@@ -32,8 +35,13 @@ public class JikeFetcher extends BookFetcher {
                 .build();
         Jike_API api = mRetrofit.create(Jike_API.class);
         //create an instance of jike api
-        byte[] data = Base64.decode(BuildConfig.jikeApiKey, Base64.DEFAULT);
-        Call<JikeJson> call = api.getDBResult(isbn, new String(data, StandardCharsets.UTF_8));
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        String currApikey = sharedPreferences.getString("settings_jikeapikey", "");
+        if (TextUtils.isEmpty(currApikey)) {
+            byte[] data = Base64.decode(BuildConfig.jikeApiKey, Base64.DEFAULT);
+            currApikey = new String(data, StandardCharsets.UTF_8);
+        }
+        Call<JikeJson> call = api.getDBResult(isbn, currApikey);
 
         call.enqueue(new Callback<JikeJson>() {
             @Override

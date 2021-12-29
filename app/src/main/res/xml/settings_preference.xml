@@ -5,6 +5,9 @@
             android:title="@string/settings_web_services_title"
             android:key="settings_pref_web_services"
             android:persistent="false" />
+        <Preference
+            android:title="@string/settings_web_services_jikeapikey_title"
+            android:key="settings_pref_web_services_jikeapikey" />
         <SwitchPreference
             android:title="@string/settings_auto_complete_website_title"
             android:key="settings_pref_acwebsite"

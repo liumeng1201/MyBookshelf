@@ -63,6 +63,7 @@ public class SettingsFragment extends PreferenceFragment {
     private Preference backupPreference;
     private Preference restorePreference;
     private Preference webServicesPreference;
+    private Preference jikeApiKeyPreference;
     private Preference exportCSVPreference;
 
     private SharedPreferences sharedPreferences;
@@ -76,6 +77,7 @@ public class SettingsFragment extends PreferenceFragment {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         setBackupCategory();
         setWebServicesPreference();
+        setJikeApiKeyPreference();
         setExportCSVPreference();
     }
 
@@ -209,7 +211,37 @@ public class SettingsFragment extends PreferenceFragment {
                 return false;
             }
         });
+    }
 
+    private void setJikeApiKeyPreference() {
+        jikeApiKeyPreference = findPreference("settings_pref_web_services_jikeapikey");
+        final String currApikey = sharedPreferences.getString("settings_jikeapikey", "");
+        jikeApiKeyPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                new MaterialDialog.Builder(getActivity())
+                        .title(R.string.settings_web_services_jikeapikey_title)
+                        .input(getString(R.string.settings_web_services_jikeapikey_hint), currApikey, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
+                            }
+                        })
+                        .positiveText("OK")
+                        .negativeText("Cancel")
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                String inputApiKey = dialog.getInputEditText().getText().toString();
+                                Toast.makeText(getActivity(), inputApiKey, Toast.LENGTH_SHORT).show();
+                                sharedPreferences.edit().putString("settings_jikeapikey", inputApiKey).apply();
+                                setJikeApiKeyPreference();
+                            }
+                        })
+                        .canceledOnTouchOutside(false)
+                        .show();
+                return false;
+            }
+        });
     }
 
     private void setBackupCategory() {
